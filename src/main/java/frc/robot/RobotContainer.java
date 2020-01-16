@@ -32,8 +32,6 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-
-    
   }
 
   /**
@@ -49,12 +47,11 @@ public class RobotContainer {
     final JoystickButton y = new JoystickButton(joystick, 4);
     final JoystickButton rb = new JoystickButton(joystick, 6);
 
+    b.whenPressed(new StopShooter(m_ShooterSubsystem));
     rb.whenPressed(new RunShooter(m_ShooterSubsystem, 0.25));
     a.whenPressed(new RunShooter(m_ShooterSubsystem, 0.5));
-    b.whenPressed(new StopShooter(m_ShooterSubsystem));
     x.whenPressed(new RunShooter(m_ShooterSubsystem, 0.75));
     y.whenPressed(new RunShooter(m_ShooterSubsystem, 1.0));
-
   }
 
 

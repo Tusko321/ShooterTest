@@ -9,21 +9,21 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class ShooterSubsystem extends SubsystemBase {
-    private VictorSPX motor3;
-    private VictorSPX motor4;
+    private CANSparkMax motor3;
+    private CANSparkMax motor4;
 
-    private VictorSPX leftMotors;
-    private VictorSPX rightMotors;
+    private CANSparkMax leftMotors;
+    private CANSparkMax rightMotors;
 
     public ShooterSubsystem() {
-        this(new VictorSPX(0), new VictorSPX(2), new VictorSPX(3), new VictorSPX(4));
+        this(new CANSparkMax(0, MotorType.kBrushless), new CANSparkMax(1, MotorType.kBrushless), new CANSparkMax(2, MotorType.kBrushless), new CANSparkMax(3, MotorType.kBrushless));
     }
 
-    public ShooterSubsystem(VictorSPX rMotors, VictorSPX lMotors, VictorSPX motor3, VictorSPX motor4) {
+    public ShooterSubsystem(CANSparkMax rMotors, CANSparkMax lMotors, CANSparkMax motor3, CANSparkMax motor4) {
         // Init motors
         this.rightMotors = rMotors;
         this.leftMotors = lMotors;
@@ -32,16 +32,22 @@ public class ShooterSubsystem extends SubsystemBase {
 
         this.motor3.follow(this.rightMotors);
         this.motor4.follow(this.leftMotors);
+
+        this.leftMotors.setClosedLoopRampRate(2);
+        this.rightMotors.setClosedLoopRampRate(2);
+        this.motor3.setClosedLoopRampRate(2);
+        this.motor4.setClosedLoopRampRate(2);
     }
 
     public void setSpeed(double speed) {
         // Function that sets motor speed
-        rightMotors.set(ControlMode.PercentOutput, -speed);
-        leftMotors.set(ControlMode.PercentOutput, speed);
+        rightMotors.set(-speed);
+        leftMotors.set(speed);
     }
 
     public double getRPM(double speed) {
         if (speed < 0) {
+            System.out.println("Speed has been set less than zero!");
             throw (new NumberFormatException("Speed should not be less than zero"));
         }
         return (6260 * speed) - 223;
@@ -49,9 +55,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public double getSetPoint(double rpm) {
         if (rpm < 0) {
+            System.out.println("RPM has been set below zero!");
             throw (new NumberFormatException("RPM should not be less than zero"));
         }
-        return (rpm - 223) / 6260;
+        return (rpm + 223) / 6260;
     }
 
     // Stops motors
