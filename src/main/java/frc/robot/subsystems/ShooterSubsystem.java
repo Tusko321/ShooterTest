@@ -19,6 +19,8 @@ public class ShooterSubsystem extends SubsystemBase {
     private CANSparkMax leftMotors;
     private CANSparkMax rightMotors;
 
+    private double speed;
+
     public ShooterSubsystem() {
         this(new CANSparkMax(0, MotorType.kBrushless), new CANSparkMax(1, MotorType.kBrushless), new CANSparkMax(2, MotorType.kBrushless), new CANSparkMax(3, MotorType.kBrushless));
     }
@@ -33,16 +35,22 @@ public class ShooterSubsystem extends SubsystemBase {
         this.motor3.follow(this.rightMotors);
         this.motor4.follow(this.leftMotors);
 
-        this.leftMotors.setClosedLoopRampRate(2);
-        this.rightMotors.setClosedLoopRampRate(2);
-        this.motor3.setClosedLoopRampRate(2);
-        this.motor4.setClosedLoopRampRate(2);
+        //this.leftMotors.setClosedLoopRampRate(2);
+        //this.rightMotors.setClosedLoopRampRate(2);
+        //this.motor3.setClosedLoopRampRate(2);
+        //this.motor4.setClosedLoopRampRate(2);
     }
 
     public void setSpeed(double speed) {
         // Function that sets motor speed
         rightMotors.set(-speed);
         leftMotors.set(speed);
+    }
+
+    public void addSpeed(double speed)
+    {
+        this.speed += speed;
+        setSpeed(this.speed);
     }
 
     public double getRPM(double speed) {
@@ -63,6 +71,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     // Stops motors
     public void stop() {
+        speed = 0.0;
         setSpeed(0.0);
     }
 

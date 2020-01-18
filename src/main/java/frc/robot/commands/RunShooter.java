@@ -36,9 +36,9 @@ public class RunShooter extends CommandBase {
     @Override
     public void execute() 
     {
-        m_ShooterSubsystem.setSpeed(m_Speed);
-        System.out.println(m_ShooterSubsystem.getRPM(m_Speed));
-        System.out.println(m_ShooterSubsystem.getSetPoint(m_ShooterSubsystem.getRPM(m_Speed)));
+        m_ShooterSubsystem.addSpeed(m_Speed);
+        //System.out.println(m_ShooterSubsystem.getRPM(m_Speed));
+        //System.out.println(m_ShooterSubsystem.getSetPoint(m_ShooterSubsystem.getRPM(m_Speed)));
     }
 
     // Called once the command ends or is interrupted.

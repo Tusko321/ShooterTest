@@ -46,12 +46,16 @@ public class RobotContainer {
     final JoystickButton x = new JoystickButton(joystick, 3);
     final JoystickButton y = new JoystickButton(joystick, 4);
     final JoystickButton rb = new JoystickButton(joystick, 6);
+    final JoystickButton leftMenu = new JoystickButton(joystick, 7);
+    final JoystickButton rightMenu = new JoystickButton(joystick, 8);
 
     b.whenPressed(new StopShooter(m_ShooterSubsystem));
-    rb.whenPressed(new RunShooter(m_ShooterSubsystem, 0.25));
-    a.whenPressed(new RunShooter(m_ShooterSubsystem, 0.5));
-    x.whenPressed(new RunShooter(m_ShooterSubsystem, 0.6));
-    y.whenPressed(new RunShooter(m_ShooterSubsystem, 1.0));
+    leftMenu.whenPressed(new RunShooter(m_ShooterSubsystem, -0.1));
+    rightMenu.whenPressed(new RunShooter(m_ShooterSubsystem, 0.1));
+    //rb.whenPressed(new RunShooter(m_ShooterSubsystem, 0.25));
+    //a.whenPressed(new RunShooter(m_ShooterSubsystem, 0.5));
+    //x.whenPressed(new RunShooter(m_ShooterSubsystem, 0.6));
+    //y.whenPressed(new RunShooter(m_ShooterSubsystem, 1.0));
   }
 
 
