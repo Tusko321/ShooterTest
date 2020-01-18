@@ -50,7 +50,7 @@ public class RobotContainer {
     b.whenPressed(new StopShooter(m_ShooterSubsystem));
     rb.whenPressed(new RunShooter(m_ShooterSubsystem, 0.25));
     a.whenPressed(new RunShooter(m_ShooterSubsystem, 0.5));
-    x.whenPressed(new RunShooter(m_ShooterSubsystem, 0.75));
+    x.whenPressed(new RunShooter(m_ShooterSubsystem, 0.6));
     y.whenPressed(new RunShooter(m_ShooterSubsystem, 1.0));
   }
 

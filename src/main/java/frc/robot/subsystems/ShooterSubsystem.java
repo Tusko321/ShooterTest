@@ -67,7 +67,8 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     @Override
-    public void periodic() {
-
+    public void periodic() {      
+        System.out.println("Left motors: " + leftMotors.getAlternateEncoder().getVelocity());
+        System.out.println("Right motors: " + rightMotors.getAlternateEncoder().getVelocity());
     }
 }
