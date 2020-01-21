@@ -8,37 +8,41 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class RunShooter extends CommandBase {
-    private ShooterSubsystem m_ShooterSubsystem;
-    private double m_Speed;
+public class RumbleCommand extends CommandBase {
+    private Joystick joystick;
+    private GenericHID.RumbleType left, right;
 
-    public RunShooter( ShooterSubsystem shooterSubsystem, double speed ) 
+    private double rumbleSpeed;
+
+    public RumbleCommand(GenericHID.RumbleType left, GenericHID.RumbleType right, double rumbleSpeed, Joystick joystick) 
     {
-        m_ShooterSubsystem = shooterSubsystem;
-        addRequirements(m_ShooterSubsystem);
+        this.left = left;
+        this.right = right;
+        this.rumbleSpeed = rumbleSpeed;
 
-        m_Speed = speed;
+        this.joystick = joystick;
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() 
     {
-
+        joystick.setRumble(left, rumbleSpeed);
+        joystick.setRumble(right, rumbleSpeed);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() 
     {
-        m_ShooterSubsystem.addSpeed(m_Speed);
-        System.out.println(m_ShooterSubsystem.getRPM(m_Speed));
-        System.out.println(m_ShooterSubsystem.getSetPoint(m_ShooterSubsystem.getRPM(m_Speed)));
+
     }
 
     // Called once the command ends or is interrupted.

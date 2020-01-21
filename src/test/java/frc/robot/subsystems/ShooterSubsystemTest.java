@@ -23,7 +23,7 @@ public class ShooterSubsystemTest {
 
     @Before
     public void init() {
-        shooter = new ShooterSubsystem(mock(CANSparkMax.class), mock(CANSparkMax.class), mock(CANSparkMax.class), mock(CANSparkMax.class));
+        shooter = new ShooterSubsystem();// mock(CANSparkMax.class), mock(CANSparkMax.class));
     }
 
     @Test

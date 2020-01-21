@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.RumbleCommand;
 import frc.robot.commands.RunShooter;
 import frc.robot.commands.StopShooter;
 
@@ -52,6 +53,8 @@ public class RobotContainer {
     b.whenPressed(new StopShooter(m_ShooterSubsystem));
     leftMenu.whenPressed(new RunShooter(m_ShooterSubsystem, -0.1));
     rightMenu.whenPressed(new RunShooter(m_ShooterSubsystem, 0.1));
+    a.whenPressed(new RumbleCommand(GenericHID.RumbleType.kLeftRumble, GenericHID.RumbleType.kRightRumble, 1.0, joystick));
+    b.whenPressed(new RumbleCommand(GenericHID.RumbleType.kLeftRumble, GenericHID.RumbleType.kRightRumble, 0.0, joystick));
     //rb.whenPressed(new RunShooter(m_ShooterSubsystem, 0.25));
     //a.whenPressed(new RunShooter(m_ShooterSubsystem, 0.5));
     //x.whenPressed(new RunShooter(m_ShooterSubsystem, 0.6));
